@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riot tier search</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<form id="tiercheck">
+    <input type="text" id="tier" name="tier" value="GOLD">
+    <input type="text" id="division" name="division" value="IV">
+    <button type="button" onclick="tiercheck()">확인</button>
+    <div id="loldata">리턴 데이터</div>
+</form>
+
+<script>
+    function tiercheck(){
+        var tier = $("#tier").val();
+        var division = $("#division").val();
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/summoner/tiercheck",
+            data: {tier : tier , division : division},
+            success: function (data) {
+            let str = ""
+            console.log(data)
+            for(let i in data){
+                for(let j = 0; j<5; j++){
+<!--                console.log(i)-->
+<!--                console.log(j)-->
+                console.log(data[i][j])
+                str += "<br>"+data[i][j].queue+"</br>"
+                }
+            }
+            $('#loldata').append(str)
+<!--                document.querySelector('#loldata') = str-->
+           }
+        })
+    }
+
+</script>
+</body>
+</html>

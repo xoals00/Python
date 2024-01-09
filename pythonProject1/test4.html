@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>롤 데이터 수집</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<form id="loldatainput">
+    <input type="text" id="id" name="id" value="깡통차기국내1위">
+    <input type="text" id="tag" name="tag" value="KR1">
+    <button type="button" onclick="loldatainput()">정보 불러오기</button>
+    <div id="loldata">최근 20게임 정보</div>
+</form>
+<script>
+    function loldatainput(){
+        var id = $("#id").val();
+        var tag = $("#tag").val();
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/summoner/loldatainput",
+            data: {id : id , tag : tag},
+            success: function (data) {
+
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
